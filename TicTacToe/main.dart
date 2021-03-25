@@ -18,7 +18,7 @@ class TicTacToe {
       };
   // TODO: Make computer not just entirely random
   void computerMove() {
-    var choice = new Random().nextInt(9);
+    var choice = findThreat() == -1 ? Random().nextInt(9) : findThreat();
     if (board[choice] == '🔲') {
       board[choice] = '⭕';
     } else if (board.contains('🔲')) {
@@ -68,6 +68,34 @@ class TicTacToe {
     // Check for no victor
     if (!board.contains('🔲')) return 'tie';
     return '';
+  }
+
+  int findThreat() {
+    var board2d = [
+      board.sublist(0, 3),
+      board.sublist(3, 6),
+      board.sublist(6, 9)
+    ];
+    for (int i = 0; i < board2d.length; i++) {
+      if (_countInList(board2d[i], '❌') == 2) {
+        print(board2d[i]);
+        return _convertTo1d(i, board2d[i].indexOf('🔲'));
+      }
+    }
+    return -1;
+  }
+
+  int _countInList(List list, value) {
+    int out = 0;
+    list.forEach((element) {
+      out += element == value ? 1 : 0;
+    });
+    return out;
+  }
+
+  int _convertTo1d(i, j) {
+    print(i * 3 + j);
+    return i * 3 + j;
   }
 
   @override
