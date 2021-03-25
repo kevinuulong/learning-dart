@@ -3,21 +3,6 @@ import 'dart:io';
 
 void main() {
   var gameBoard = TicTacToe();
-  // gameBoard.chooseMove(3);
-  // print(gameBoard);
-  // gameBoard.computerMove();
-  // gameBoard.chooseMove(5);
-  // print(gameBoard);
-  // gameBoard.computerMove();
-  // print(gameBoard);
-  // gameBoard.chooseMove(4);
-  // print(gameBoard);
-  // gameBoard.computerMove();
-  // print(gameBoard);
-  // gameBoard.chooseMove(7);
-  // print(gameBoard);
-  // gameBoard.computerMove();
-  // print(gameBoard);
   gameBoard.playGame();
 }
 
