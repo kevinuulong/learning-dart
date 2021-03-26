@@ -30,7 +30,7 @@ class TicTacToe {
     print(this);
     while (checkForWin() == '') {
       chooseMove(int.parse(stdin.readLineSync()!));
-      computerMove();
+      if (checkForWin() == '') computerMove();
       print(this);
     }
     String win = checkForWin();
@@ -76,12 +76,27 @@ class TicTacToe {
       board.sublist(3, 6),
       board.sublist(6, 9)
     ];
+    // Find horizontal threat
     for (int i = 0; i < board2d.length; i++) {
       if (_countInList(board2d[i], '❌') == 2) {
-        print(board2d[i]);
         return _convertTo1d(i, board2d[i].indexOf('🔲'));
       }
     }
+    // Find vertical threat
+    for (int i = 0; i < board2d.length; i++) {
+      // TODO: look into simplifying this
+      var column = [board2d[0][i], board2d[1][i], board2d[2][i]];
+      if (_countInList(column, '❌') == 2) {
+        return _convertTo1d(column.indexOf('🔲'), i);
+      }
+    }
+    // Find diagonal threats
+    // TODO: Probably a cleaner way to find these
+    var diagonals = [
+      [board2d[0][0], board2d[1][1], board2d[2][2]],
+      [board2d[0][2], board2d[1][1], board2d[2][0]]
+    ];
+    for (List<String> element in diagonals) {}
     return -1;
   }
 
@@ -94,7 +109,6 @@ class TicTacToe {
   }
 
   int _convertTo1d(i, j) {
-    print(i * 3 + j);
     return i * 3 + j;
   }
 
